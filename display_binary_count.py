@@ -11,7 +11,6 @@ placePin = (10, 22, 27, 17)
 number = (0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90)
 
 counter = 0
-timer1 = 0
 
 y=int(input('Nº 1 - 31?: '))
 x=[[0,0,0,0,1],[0,0,0,1,0],[0,0,0,1,1],[0,0,1,0,0],[0,0,1,0,1],[0,0,1,1,0],[0,0,1,1,1],[0,1,0,0,0],[0,1,0,0,1],[0,1,0,1,0],[0,1,0,1,1],[0,1,1,0,0],[0,1,1,0,1],[0,1,1,1,0],[0,1,1,1,1],[1,0,0,0,0],[1,0,0,0,1],[1,0,0,1,0],[1,0,0,1,1],[1,0,1,0,0],[1,0,1,0,1],[1,0,1,1,0],[1,0,1,1,1],[1,1,0,0,0],[1,1,0,0,1],[1,1,0,1,0],[1,1,0,1,1],[1,1,1,0,0],[1,1,1,0,1],[1,1,1,1,0],[1,1,1,1,1]]
@@ -41,7 +40,7 @@ def pickDigit(digit):
     GPIO.output(placePin[digit], GPIO.HIGH)
 
 
-def Binary_counter(binary):
+def Binary_counter():
     global counter
     for i in range(0,y,1):
         GPIO.output(5,x[i][0])
@@ -79,15 +78,13 @@ def setup():
     GPIO.setup(RCLK, GPIO.OUT)
     GPIO.setup(SRCLK, GPIO.OUT)
     for i in placeLed:
-        GPIO.setupt(i,GPIO.OUT)
+        GPIO.setup(i,GPIO.OUT)
     for i in placePin:
         GPIO.setup(i, GPIO.OUT)
     
 
 def destroy():   # When "Ctrl+C" is pressed, the function is executed.
-    global timer1
     GPIO.cleanup()
-    timer1.cancel()  # cancel the timer
 
 if __name__ == '__main__':  # Program starting from here
     setup()
