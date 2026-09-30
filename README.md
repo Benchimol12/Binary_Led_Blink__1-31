@@ -28,26 +28,30 @@ O utilizador escolhe um número entre 1 e 31. O objetivo é incrementar o contad
 - O código utiliza a numeração BCM dos pinos GPIO.
 
 ## Registo de deslocamento 74HC595
-Sinal	GPIO BCM	Função
-SDI	24	Entrada de dados
-RCLK	23	Clock do registo
-SRCLK	18	Clock de deslocamento
+| Sinal | GPIO BCM | Função | 
+|---|---|---| 
+| SDI | 24 | Entrada de dados |
+| RCLK | 23	| Clock do registo |
+| SRCLK	| 18 | Clock de deslocamento|
 
 ## LEDs do contador binário
-Posição binária	GPIO BCM
-Bit 1	5
-Bit 2	6
-Bit 3	13
-Bit 4	19
-Bit 5	26
+| Posição binária | GPIO BCM |
+|---|---|
+| Bit 1 | 5 | 
+| Bit 2 | 6 |
+| Bit 3 | 13 |
+| Bit 4 | 19 |
+| Bit 5 | 26 |
+
 Os LEDs representam um número binário de cinco bits. Dependendo da ordem física das ligações, o GPIO 5 poderá representar o bit mais significativo e o GPIO 26 o bit menos significativo.
 
 ## Seleção dos dígitos do display
-Dígito	GPIO BCM
-Dígito 1	10
-Dígito 2	22
-Dígito 3	27
-Dígito 4	17
+|Dígito	|GPIO BCM|
+|---|---|
+|Dígito 1|	10|
+|Dígito 2|	22|
+|Dígito 3|	27|
+|Dígito 4|	17|
 
 ## Requisitos de software
 - Python 3;
@@ -56,81 +60,65 @@ Dígito 4	17
 
 A biblioteca pode ser instalada com:
 
-bash
-
-
+```bash
 sudo apt update
 sudo apt install python3-rpi.gpio
+```
 Em sistemas que permitam a instalação através do pip:
-
-bash
-
-
+```bash
 python3 -m pip install RPi.GPIO
-
+````
 ## Instalação
 Clone ou descarregue o projeto:
-
-bash
-
-
+```bash
 git clone URL_DO_REPOSITORIO
 cd NOME_DO_PROJETO
+```
 Guarde o código num ficheiro, por exemplo:
-
-text
-
-
+```text
 contador.py
+```
 Confirme todas as ligações antes de ligar o circuito. Os LEDs e os segmentos do display devem utilizar resistências adequadas para limitar a corrente.
 
 ## Utilização
 Execute o programa no Raspberry Pi:
 
-bash
-
-
+```bash
 python3 contador.py
+```
 Quando solicitado, introduza um número entre 1 e 31:
-
-text
-
-
+```text
 Nº 1 - 31?: 15
+```
 Valores fora do intervalo são rejeitados e o programa volta a pedir outro número.
 
 Para terminar a execução, utilize:
-
-text
-
-
+```text
 Ctrl+C
-
+```
 ## Funcionamento
 ### Tabela binária
 A variável x contém as representações binárias dos números de 1 a 31:
 
-python
-
-
+```python
 x = [
     [0, 0, 0, 0, 1],
     [0, 0, 0, 1, 0],
     # ...
     [1, 1, 1, 1, 1]
 ]
+```
 Cada posição é enviada para um dos cinco LEDs.
 
 ## Display de sete segmentos
 A variável number contém os padrões necessários para apresentar os algarismos de 0 a 9:
 
-python
-
-
+```python
 number = (
     0xc0, 0xf9, 0xa4, 0xb0, 0x99,
     0x92, 0x82, 0xf8, 0x80, 0x90
 )
+```
 A função hc595_shift() envia cada padrão para o registo de deslocamento.
 
 ## Multiplexagem
