@@ -132,6 +132,6 @@ Quando o utilizador pressiona Ctrl+C, a função destroy() é chamada para liber
 - clearDisplay() - limpa os segmentos do display;
 - hc595_shift(data) - envia oito bits para o 74HC595;
 - pickDigit(digit) - seleciona um dos quatro dígitos;
-- Binary_counter(binary) - atualiza os LEDs e incrementa o contador;
+- Binary_counter() - atualiza os LEDs e incrementa o contador;
 - loop() - atualiza continuamente o display;
 - destroy() - limpa a configuração dos GPIO e cancela o temporizador.
