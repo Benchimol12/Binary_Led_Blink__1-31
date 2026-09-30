@@ -110,7 +110,7 @@ x = [
 ```
 Cada posição é enviada para um dos cinco LEDs.
 
-## Display de sete segmentos
+### Display de sete segmentos
 A variável number contém os padrões necessários para apresentar os algarismos de 0 a 9:
 
 ```python
@@ -121,13 +121,13 @@ number = (
 ```
 A função hc595_shift() envia cada padrão para o registo de deslocamento.
 
-## Multiplexagem
+### Multiplexagem
 A função pickDigit() ativa apenas um dígito de cada vez. A função loop() alterna rapidamente entre os quatro dígitos, criando a impressão de que todos estão ligados em simultâneo.
 
-## Encerramento
+### Encerramento
 Quando o utilizador pressiona Ctrl+C, a função destroy() é chamada para libertar os recursos GPIO.
 
-## Estrutura das funções
+### Estrutura das funções
 - setup() - configura os pinos GPIO como saídas;
 - clearDisplay() - limpa os segmentos do display;
 - hc595_shift(data) - envia oito bits para o 74HC595;
