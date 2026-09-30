@@ -93,11 +93,3 @@ if __name__ == '__main__':  # Program starting from here
     except KeyboardInterrupt:
         destroy()
         
-        
-        
-        
-        
-        
-        
-        
-        
