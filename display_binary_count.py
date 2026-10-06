@@ -41,35 +41,29 @@ def pickDigit(digit):
 
 
 def Binary_counter():
-    global counter
+    global counter, y
     for i in range(0,y,1):
+        loop(counter)
         GPIO.output(5,x[i][0])
         GPIO.output(6,x[i][1])
         GPIO.output(13,x[i][2])
         GPIO.output(19,x[i][3])
         GPIO.output(26,x[i][4])
         time.sleep(3/2)
-        counter += 1
         print("%d" % counter)
+        counter += 1
 
-def loop():
-    global counter
-    while True:
+def loop(count):
+    if count < 10:
         clearDisplay()
         pickDigit(0)
-        hc595_shift(number[counter % 10])
-
+        hc595_shift(number[count % 10])
+    elif count == 10:
         clearDisplay()
         pickDigit(1)
-        hc595_shift(number[counter % 100//10])
-
-        clearDisplay()
-        pickDigit(2)
-        hc595_shift(number[counter % 1000//100])
-
-        clearDisplay()
-        pickDigit(3)
-        hc595_shift(number[counter % 10000//1000])
+        hc595_shift(number[count % 100//10])
+        pickDigit(0)
+        hc595_shift(number[count % 10])
 
 
 def setup():
@@ -89,7 +83,7 @@ def destroy():   # When "Ctrl+C" is pressed, the function is executed.
 if __name__ == '__main__':  # Program starting from here
     setup()
     try:
-        loop()
+        Binary_counter()
     except KeyboardInterrupt:
         destroy()
         
